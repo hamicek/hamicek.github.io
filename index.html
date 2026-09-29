@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Miroslav Halabrín</title>
+  <meta name="description" content="Software architect and developer focused on reliable backend and distributed systems. Building aether, an OTP-inspired runtime over NATS. Go, TypeScript, Python.">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Miroslav Halabrín · Software architect">
+  <meta property="og:description" content="Reliable backend and distributed systems, in Go, TypeScript and Python. Building aether, an OTP-inspired runtime over NATS.">
+  <meta property="og:url" content="https://hamicek.github.io/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Miroslav Halabrín · Software architect">
+  <meta name="twitter:description" content="Reliable backend and distributed systems, in Go, TypeScript and Python.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap">
+
+  <style>
+  :root {
+    color-scheme: dark;
+    --bg:#0A0E14; --bg-2:#0E141D; --surface:#131B26; --surface-2:#18212E;
+    --ink:#E7EDF4; --ink-soft:#9AA8B8; --ink-faint:#5F6D7E;
+    --line:#202B39; --line-strong:#2C3A4C;
+    --accent:#56A6FF; --accent-2:#3FE0C8; --accent-glow:rgba(86,166,255,0.16);
+    --ok:#43C980; --ok-soft:#10241A;
+    --display:'Archivo',system-ui,-apple-system,sans-serif;
+    --body:'Archivo',system-ui,-apple-system,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;
+  }
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme="dark"]){
+      color-scheme:light;
+      --bg:#F5F7FA; --bg-2:#EDF1F6; --surface:#FFFFFF; --surface-2:#F1F5F9;
+      --ink:#101720; --ink-soft:#4A5765; --ink-faint:#7E8B99;
+      --line:#DCE3EB; --line-strong:#C4CFDA;
+      --accent:#1F6FE0; --accent-2:#0E9E8A; --accent-glow:rgba(31,111,224,0.12);
+      --ok:#128049; --ok-soft:#DEF1E6;
+    }
+  }
+  :root[data-theme="light"]{
+    color-scheme:light;
+    --bg:#F5F7FA; --bg-2:#EDF1F6; --surface:#FFFFFF; --surface-2:#F1F5F9;
+    --ink:#101720; --ink-soft:#4A5765; --ink-faint:#7E8B99;
+    --line:#DCE3EB; --line-strong:#C4CFDA;
+    --accent:#1F6FE0; --accent-2:#0E9E8A; --accent-glow:rgba(31,111,224,0.12);
+    --ok:#128049; --ok-soft:#DEF1E6;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  img{max-width:100%;}
+  body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  a{color:inherit;}
+  .container{max-width:900px;margin:0 auto;padding-inline:24px;}
+
+  nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .nav-inner{max-width:900px;margin:0 auto;padding:13px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+  .brand{font-family:var(--mono);font-weight:700;font-size:15px;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:9px;}
+  .brand .glyph{width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--accent-2),var(--accent) 70%);box-shadow:0 0 10px var(--accent-glow);}
+  .nav-right{margin-left:auto;display:flex;gap:16px;align-items:center;}
+  .nav-right a{font-size:14px;color:var(--ink-soft);text-decoration:none;font-weight:500;}
+  .nav-right a:hover{color:var(--ink);}
+  .toggle{display:inline-flex;border:1px solid var(--line-strong);border-radius:8px;overflow:hidden;}
+  .toggle button{font-family:var(--mono);font-size:12px;font-weight:600;padding:5px 10px;background:transparent;color:var(--ink-faint);border:0;cursor:pointer;}
+  .toggle button[aria-pressed="true"]{background:var(--accent);color:#061019;}
+  @media (max-width:560px){ .nav-right a.opt{display:none;} }
+
+  .hero{position:relative;padding-block:70px 34px;}
+  .hero::before{content:"";position:absolute;inset:-10% -20% auto -20%;height:420px;background:radial-gradient(560px 280px at 28% 0%,var(--accent-glow),transparent 70%);pointer-events:none;z-index:0;}
+  .hero .container{position:relative;z-index:1;}
+  .eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.06em;color:var(--accent);}
+  h1{font-family:var(--display);font-weight:800;font-size:clamp(38px,7vw,66px);line-height:1.02;letter-spacing:-0.025em;margin:14px 0 0;}
+  .lede{font-size:clamp(17px,2.3vw,20px);color:var(--ink-soft);margin:20px 0 0;max-width:58ch;line-height:1.55;}
+  .lede b{color:var(--ink);font-weight:600;}
+  .avail{display:inline-flex;align-items:center;gap:8px;margin-top:22px;font-family:var(--mono);font-size:13px;color:var(--ok);background:var(--ok-soft);border:1px solid color-mix(in srgb,var(--ok) 35%,transparent);border-radius:999px;padding:6px 13px;}
+  .avail .dot{width:8px;height:8px;border-radius:50%;background:var(--ok);}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px;}
+  .btn{font-family:var(--mono);font-size:14px;font-weight:500;text-decoration:none;padding:11px 18px;border-radius:8px;display:inline-flex;align-items:center;gap:8px;}
+  .btn.primary{background:var(--accent);color:#061019;font-weight:700;}
+  .btn.ghost{border:1px solid var(--line-strong);color:var(--ink);}
+  .btn.ghost:hover{border-color:var(--accent);}
+
+  section.block{padding-block:44px;}
+  .sec-label{font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
+  h2{font-family:var(--display);font-weight:700;font-size:clamp(22px,4vw,30px);letter-spacing:-0.02em;margin:0 0 18px;}
+
+  .work{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media (max-width:680px){ .work{grid-template-columns:1fr;} }
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px;display:flex;flex-direction:column;}
+  .card.lead{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent-glow),0 16px 44px -30px var(--accent);}
+  .card .role{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;color:var(--ink-faint);text-transform:uppercase;}
+  .card h3{font-family:var(--display);font-weight:700;font-size:19px;margin:8px 0 0;}
+  .card p{margin:9px 0 0;font-size:14.5px;color:var(--ink-soft);}
+  .card .go{margin-top:14px;font-family:var(--mono);font-size:13px;color:var(--accent);text-decoration:none;}
+  .card .go:hover{text-decoration:underline;}
+  .stack{font-family:var(--mono);font-size:12px;color:var(--ink-faint);margin-top:12px;}
+
+  .values{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .values p{font-size:clamp(17px,2.4vw,21px);color:var(--ink);max-width:60ch;margin:0;line-height:1.5;font-weight:500;}
+  .values .q{color:var(--accent);}
+
+  .contact .container{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:34px 28px;text-align:center;position:relative;overflow:hidden;max-width:820px;}
+  .contact h2{margin-bottom:10px;}
+  .contact p{color:var(--ink-soft);margin:0 auto 20px;max-width:48ch;}
+  .contact .cta-row{justify-content:center;}
+
+  footer{border-top:1px solid var(--line);margin-top:30px;padding-block:24px 10px;}
+  .foot-inner{max-width:900px;margin:0 auto;padding-inline:24px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);}
+  .foot-inner a{color:var(--ink-soft);text-decoration:none;}
+  .foot-inner a:hover{color:var(--accent);}
+
+  a:focus-visible,.btn:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="brand" href="#top"><span class="glyph"></span>Miroslav Halabrín</a>
+    <div class="nav-right">
+      <a class="opt" href="https://github.com/hamicek">GitHub</a>
+      <a class="opt" href="https://www.linkedin.com/in/miroslav-halabr%C3%ADn-20507248/">LinkedIn</a>
+      <div class="toggle" role="group" aria-label="Language">
+        <button type="button" data-lang="cs">CZ</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="container">
+    <div class="eyebrow">
+      <span class="l-cs">Softwarový architekt &amp; vývojář</span>
+      <span class="l-en">Software architect &amp; developer</span>
+    </div>
+    <h1>Miroslav Halabrín</h1>
+    <p class="lede l-cs">Stavím <b>spolehlivé backendové a distribuované systémy</b>. Věci, které musí běžet dlouho, nespadnout a přežít reálný provoz. Tyhle principy teď uplatňuji v <b>průmyslu a energetice</b> (SCADA).</p>
+    <p class="lede l-en">I build <b>reliable backend and distributed systems</b>. Things that must run for a long time, not crash, and survive real production. I currently apply these principles in <b>industry and energy</b> (SCADA).</p>
+
+    <div class="avail">
+      <span class="dot"></span>
+      <span class="l-cs">Otevřený zakázkám v ČR a na Slovensku</span>
+      <span class="l-en">Available for contract work in Czechia &amp; Slovakia</span>
+    </div>
+
+    <div class="cta-row">
+      <a class="btn primary" href="https://github.com/hamicek/aether"><span class="l-cs">Můj projekt: aether &rarr;</span><span class="l-en">My project: aether &rarr;</span></a>
+      <a class="btn ghost" href="https://www.linkedin.com/in/miroslav-halabr%C3%ADn-20507248/">LinkedIn</a>
+    </div>
+  </div>
+</header>
+
+<section class="block">
+  <div class="container">
+    <div class="sec-label"><span class="l-cs">Co stavím</span><span class="l-en">What I build</span></div>
+
+    <div class="work">
+      <div class="card lead">
+        <div class="role"><span class="l-cs">Open source · vlajková loď</span><span class="l-en">Open source · flagship</span></div>
+        <h3>aether</h3>
+        <p class="l-cs">Runtime pro dohled a spolehlivou komunikaci mezi procesy, inspirovaný OTP, nad NATS. Postavený přímo pro edge a průmyslové scénáře. Naměřeno: 50 000 hodnot/s, alarm p99 pod 1 ms.</p>
+        <p class="l-en">A runtime for supervising and reliably connecting processes, OTP-inspired, over NATS. Built for edge and industrial scenarios. Measured: 50,000 values/s, alarm p99 under 1 ms.</p>
+        <div class="stack">Go · TypeScript · Python · NATS</div>
+        <a class="go" href="https://hamicek.github.io/aether/"><span class="l-cs">Otevřít stránku projektu &rarr;</span><span class="l-en">Open the project page &rarr;</span></a>
+      </div>
+
+      <div class="card">
+        <div class="role"><span class="l-cs">Open source · ekosystém</span><span class="l-en">Open source · ecosystem</span></div>
+        <h3>noex</h3>
+        <p class="l-cs">Erlang/OTP patterny pro Node.js a ekosystém kolem: reaktivní store s ACID, rule engine s CEP, deklarativní logická vrstva. Koncepčně předchůdce aetheru.</p>
+        <p class="l-en">Erlang/OTP patterns for Node.js and the ecosystem around it: a reactive store with ACID, a rule engine with CEP, a declarative logic layer. The conceptual predecessor of aether.</p>
+        <div class="stack">TypeScript · Python</div>
+        <a class="go" href="https://github.com/hamicek"><span class="l-cs">Vše na GitHubu &rarr;</span><span class="l-en">Everything on GitHub &rarr;</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block values">
+  <div class="container">
+    <div class="sec-label"><span class="l-cs">Jak pracuji</span><span class="l-en">How I work</span></div>
+    <p class="l-cs">Čistě a bez <span class="q">„rychlých záplat"</span>. Správné ošetření chyb, srozumitelná architektura, kód, který se dobře čte při code review i za rok. Radši věc navrhnu pořádně hned, než abych ji pak třikrát opravoval.</p>
+    <p class="l-en">Clean, with <span class="q">no quick hacks</span>. Proper error handling, clear architecture, code that still reads well in review and a year later. I would rather design something properly up front than fix it three times afterwards.</p>
+  </div>
+</section>
+
+<section class="block contact">
+  <div class="container">
+    <h2><span class="l-cs">Pojďme se bavit</span><span class="l-en">Let's talk</span></h2>
+    <p class="l-cs">Hledáte někoho na backend, distribuované nebo průmyslové systémy v ČR nebo na Slovensku? Ozvěte se.</p>
+    <p class="l-en">Looking for someone for backend, distributed or industrial systems in Czechia or Slovakia? Get in touch.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="https://www.linkedin.com/in/miroslav-halabr%C3%ADn-20507248/"><span class="l-cs">Napište mi na LinkedInu &rarr;</span><span class="l-en">Message me on LinkedIn &rarr;</span></a>
+      <a class="btn ghost" href="https://github.com/hamicek">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-inner">
+    <span>Miroslav Halabrín</span>
+    <span>
+      <a href="https://github.com/hamicek">GitHub</a> ·
+      <a href="https://www.linkedin.com/in/miroslav-halabr%C3%ADn-20507248/">LinkedIn</a> ·
+      <a href="https://hamicek.github.io/aether/">aether</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var KEY='mh-lang';
+  function stored(){try{return localStorage.getItem(KEY);}catch(e){return null;}}
+  function save(l){try{localStorage.setItem(KEY,l);}catch(e){}}
+  function apply(l){
+    var cs=document.querySelectorAll('.l-cs'), en=document.querySelectorAll('.l-en'), i;
+    for(i=0;i<cs.length;i++){cs[i].hidden=(l!=='cs');}
+    for(i=0;i<en.length;i++){en[i].hidden=(l!=='en');}
+    var btns=document.querySelectorAll('[data-lang]');
+    for(i=0;i<btns.length;i++){btns[i].setAttribute('aria-pressed', btns[i].getAttribute('data-lang')===l ? 'true':'false');}
+    document.documentElement.setAttribute('lang', l==='cs'?'cs':'en');
+  }
+  var init=stored() || (((navigator.language||'').toLowerCase().match(/^(cs|sk)/)) ? 'cs':'en');
+  document.addEventListener('click',function(e){
+    var b=e.target.closest && e.target.closest('[data-lang]');
+    if(b){var l=b.getAttribute('data-lang');apply(l);save(l);}
+  });
+  apply(init);
+})();
+</script>
+
+</body>
+</html>
